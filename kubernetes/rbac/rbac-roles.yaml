@@ -1,0 +1,85 @@
+---
+# ===== ServiceAccounts =====
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: app-deployer
+  namespace: default
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: app-viewer
+  namespace: default
+
+---
+# ===== Roles =====
+# ROLE 1: Deployer (peut créer/modifier les Deployments)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: deployer-role
+  namespace: default
+rules:
+# Deployments
+- apiGroups: ["apps"]
+  resources: ["deployments", "deployments/scale"]
+  verbs: ["get", "list", "watch", "create", "update", "patch"]
+# Pods
+- apiGroups: [""]
+  resources: ["pods", "pods/logs"]
+  verbs: ["get", "list", "watch"]
+# Services
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list", "watch", "create", "update"]
+
+---
+# ROLE 2: Viewer (peut juste regarder)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: viewer-role
+  namespace: default
+rules:
+# Lecture seule
+- apiGroups: ["apps"]
+  resources: ["deployments", "statefulsets", "daemonsets"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources: ["pods", "services", "configmaps"]
+  verbs: ["get", "list", "watch"]
+
+---
+# ===== RoleBindings =====
+# Bind app-deployer → deployer-role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: app-deployer-binding
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: deployer-role
+subjects:
+- kind: ServiceAccount
+  name: app-deployer
+  namespace: default
+
+---
+# Bind app-viewer → viewer-role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: app-viewer-binding
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: viewer-role
+subjects:
+- kind: ServiceAccount
+  name: app-viewer
+  namespace: default

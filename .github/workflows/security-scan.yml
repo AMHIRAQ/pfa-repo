@@ -1,0 +1,82 @@
+name: Security Scan - tfsec + Trivy
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main ]
+
+jobs:
+  tfsec:
+    name: Terraform Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Run tfsec
+      uses: aquasecurity/tfsec-action@v1.0.0
+      with:
+        working_directory: 'terraform/'
+        version: latest
+        args: '--format sarif --out tfsec-results.sarif'
+    
+    - name: Upload tfsec results to GitHub Security
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: tfsec-results.sarif
+        category: 'tfsec'
+
+---
+
+  trivy-images:
+    name: Container Image Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Build Docker image (if Dockerfile exists)
+      run: |
+        if [ -f "Dockerfile" ]; then
+          docker build -t pfa-app:${{ github.sha }} .
+        fi
+      continue-on-error: true
+    
+    - name: Run Trivy on Dockerfile
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+    
+    - name: Upload Trivy results to GitHub Security
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: trivy-results.sarif
+        category: 'trivy'
+
+---
+
+  trivy-docker-image:
+    name: Trivy Container Registry Scan
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'docker-build')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Run Trivy on Docker image
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'nginx:latest'  # Remplacer par ton image
+        format: 'table'
+        exit-code: '1'  # Fail si vulnérabilité CRITICAL trouvée
+        ignore-unfixed: true
+        severity: 'CRITICAL,HIGH'
