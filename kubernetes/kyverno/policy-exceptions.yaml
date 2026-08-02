@@ -1,0 +1,23 @@
+apiVersion: kyverno.io/v1
+kind: PolicyException
+metadata:
+  name: promtail-exception
+  namespace: monitoring
+spec:
+  exceptions:
+  - ruleIndex: 0
+    ruleType: validate
+    policy: require-readonly-rootfs
+  - ruleIndex: 0
+    ruleType: validate
+    policy: disallow-privileged
+  - ruleIndex: 0
+    ruleType: validate
+    policy: require-resource-limits
+  match:
+    resources:
+      kinds:
+      - DaemonSet
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: promtail
