@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/TON-USERNAME/pfa-repo
+    repoURL: https://github.com/AMHIRAQ/pfa-repo
     targetRevision: main
     path: helm-charts/app-chart
   destination:
