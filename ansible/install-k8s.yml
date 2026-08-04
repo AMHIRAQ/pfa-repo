@@ -447,8 +447,13 @@
     - name: Display Kyverno installation result
       debug:
         msg: 'Kyverno installed successfully'
+# ========================================================
+# STEP 9: Deploy Observability Stack (Prometheus, Loki, Grafana)
+# ========================================================
+- name: Deploy Observability Stack
+  import_playbook: monitoring.yml
 #=======================================================
-# STEP 9: Verify Cluster Status
+# STEP 10: Verify Cluster Status
 #=======================================================
 - name: Verify cluster setup
   hosts: master
