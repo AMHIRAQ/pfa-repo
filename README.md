@@ -138,5 +138,6 @@ Grafana contient les datasources :
 - ✅ GitHub Actions scanant les vulnérabilités
 
 ## 📝 Auteur
+AMHIRAQ Abdelhakim
 
 **Projet PFA** - Plateforme Kubernetes Sécurisée Observable
