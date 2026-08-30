@@ -96,7 +96,19 @@
 
     - name: Apply sysctl settings
       command: sysctl --system
+    
+    - name: Install pip3
+      apt:
+        name: python3-pip
+        state: present
+        update_cache: yes
 
+    - name: Install Python Kubernetes library for Ansible
+      pip:
+        name: kubernetes
+        state: present
+        executable: pip3
+  
 #=======================================================
 # STEP 3: Install Kubernetes Components
 #=======================================================
@@ -408,15 +420,16 @@
     - name: Add Kyverno Helm repository
       shell: |
         helm repo add kyverno https://kyverno.github.io/kyverno/
-        helm repo update
       environment:
         KUBECONFIG: /etc/kubernetes/admin.conf
 
-    - name: Install Kyverno
+    - name: Install Kyverno v3.8.2
       shell: |
         helm install kyverno kyverno/kyverno \
           -n kyverno \
-          --create-namespace
+          --create-namespace \
+          --version 3.8.2 \
+          --set enablePolicyException=true
       environment:
         KUBECONFIG: /etc/kubernetes/admin.conf
       register: kyverno_install_result
