@@ -30,7 +30,7 @@ https://drive.google.com/drive/folders/1x-XXUZZebkpq6dfuoC6xlKEEiiFkcs0I?usp=dri
 -  **Promtail** : Collection des logs (DaemonSet)
 -  **Node Exporter** : Métriques des nœuds (DaemonSet)
 
-## 🎯 Architecture
+##  Architecture
 ┌─────────────────────────────────────────┐
 │ GitHub Repository │
 │ - Terraform (Infrastructure) │
