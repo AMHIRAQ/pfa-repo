@@ -4,6 +4,8 @@
 
 Une plateforme **production-ready** Kubernetes avec infrastructure-as-code, GitOps, sécurité, et observabilité.
 
+## Démo
+https://drive.google.com/drive/folders/1x-XXUZZebkpq6dfuoC6xlKEEiiFkcs0I?usp=drive_link
 ## 📊 Stack Complet
 
 ### Infrastructure
