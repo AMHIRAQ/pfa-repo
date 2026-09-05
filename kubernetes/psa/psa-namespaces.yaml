@@ -27,4 +27,4 @@ metadata:
   labels:
     pod-security.kubernetes.io/enforce: restricted
     pod-security.kubernetes.io/audit: restricted
-    pod-security.kubernetes.io/warn: restricted
+    pod-security.kubernetes.io/warn: restricted# Test GitOps auto-sync - Sat Sep  5 02:33:26 AM EDT 2026
