@@ -1,34 +1,34 @@
 # PFA - Plateforme Kubernetes Sécurisée Observable
 
-## 🏆 Projet Complètement Réalisé
+##  Projet Complètement Réalisé
 
 Une plateforme **production-ready** Kubernetes avec infrastructure-as-code, GitOps, sécurité, et observabilité.
 
 ## Démo
 https://drive.google.com/drive/folders/1x-XXUZZebkpq6dfuoC6xlKEEiiFkcs0I?usp=drive_link
-## 📊 Stack Complet
+##  Stack Complet
 
 ### Infrastructure
-- ✅ **Terraform** : AWS VPC, EC2 (1 master + 2 workers)
-- ✅ **Ansible** : Provisioning automatisé du cluster K8s
-- ✅ **Kubernetes** : v1.28.15, 3 nœuds, Flannel CNI
+-  **Terraform** : AWS VPC, EC2 (1 master + 2 workers)
+-  **Ansible** : Provisioning automatisé du cluster K8s
+-  **Kubernetes** : v1.28.15, 3 nœuds, Flannel CNI
 
 ### Sécurité & Politiques
-- ✅ **Pod Security Admission (PSA)** : 3 niveaux (restricted, baseline, privileged)
-- ✅ **RBAC** : 2 ServiceAccounts, 2 Roles, 2 RoleBindings
-- ✅ **Kyverno** : 4 ClusterPolicies (no-privileged, readonly-rootfs, resource-limits, no-latest-tag)
+-  **Pod Security Admission (PSA)** : 3 niveaux (restricted, baseline, privileged)
+-  **RBAC** : 2 ServiceAccounts, 2 Roles, 2 RoleBindings
+-  **Kyverno** : 4 ClusterPolicies (no-privileged, readonly-rootfs, resource-limits, no-latest-tag)
 
 ### GitOps & CI/CD
-- ✅ **ArgoCD** : Sync automatique depuis GitHub
-- ✅ **GitHub Actions** : tfsec + Trivy sur chaque PR/push
-- ✅ **Helm Charts** : Prometheus, Grafana, Loki, Promtail
+-  **ArgoCD** : Sync automatique depuis GitHub
+-  **GitHub Actions** : tfsec + Trivy sur chaque PR/push
+-  **Helm Charts** : Prometheus, Grafana, Loki, Promtail
 
 ### Observabilité
-- ✅ **Prometheus** : Scrape Node Exporter + Prometheus
-- ✅ **Grafana** : Dashboards en temps réel (NodePort 32000)
-- ✅ **Loki** : Agrégation des logs
-- ✅ **Promtail** : Collection des logs (DaemonSet)
-- ✅ **Node Exporter** : Métriques des nœuds (DaemonSet)
+-  **Prometheus** : Scrape Node Exporter + Prometheus
+-  **Grafana** : Dashboards en temps réel (NodePort 32000)
+-  **Loki** : Agrégation des logs
+-  **Promtail** : Collection des logs (DaemonSet)
+-  **Node Exporter** : Métriques des nœuds (DaemonSet)
 
 ## 🎯 Architecture
 ┌─────────────────────────────────────────┐
@@ -53,7 +53,7 @@ https://drive.google.com/drive/folders/1x-XXUZZebkpq6dfuoC6xlKEEiiFkcs0I?usp=dri
 │ - Kyverno (Policy Enforcement) │
 │ - PSA + RBAC (Security) │
 └─────────────────────────────────────────┘
-## 📈 Observabilité
+## Observabilité
 
 ### Accès
 - **Prometheus** : http://WORKER_IP:30900
@@ -68,7 +68,7 @@ https://drive.google.com/drive/folders/1x-XXUZZebkpq6dfuoC6xlKEEiiFkcs0I?usp=dri
 - Tous les logs des pods
 - Accessible via Grafana Loki Explorer
 
-## 🔒 Sécurité
+##  Sécurité
 
 ### PSA Policies
 - **restricted** : No privileged containers, readonly filesystem, non-root user
@@ -85,7 +85,7 @@ https://drive.google.com/drive/folders/1x-XXUZZebkpq6dfuoC6xlKEEiiFkcs0I?usp=dri
 - **app-deployer** : Can manage deployments
 - **app-viewer** : Read-only access
 
-## 🚀 Déploiement
+##  Déploiement
 
 ### 1. Infrastructure
 ```bash
@@ -107,13 +107,13 @@ ArgoCD lira le repo GitHub et déploiera automatiquement :
 - Kyverno policies
 - Monitoring stack
 
-## 📊 Dashboards
+##  Dashboards
 
 Grafana contient les datasources :
 - **Prometheus** : Métriques cluster
 - **Loki** : Logs aggregés
 
-## 🎯 Technologies
+##  Technologies
 
 - Kubernetes 1.28.15
 - Prometheus v2.45.0
@@ -125,21 +125,21 @@ Grafana contient les datasources :
 - Terraform
 - Ansible
 
-## ✅ Checklist Final
+##  Checklist Final
 
-- ✅ Infrastructure provionnée (Terraform)
-- ✅ Cluster K8s opérationnel (Ansible)
-- ✅ ArgoCD synchronisant depuis GitHub
-- ✅ PSA policies appliquées
-- ✅ RBAC configuré
-- ✅ Kyverno enforcement actif
-- ✅ Prometheus scraping métriques
-- ✅ Grafana dashboards accessibles
-- ✅ Loki agrégant les logs
-- ✅ Promtail collectant les logs
-- ✅ GitHub Actions scanant les vulnérabilités
+-  Infrastructure provionnée (Terraform)
+-  Cluster K8s opérationnel (Ansible)
+-  ArgoCD synchronisant depuis GitHub
+-  PSA policies appliquées
+-  RBAC configuré
+-  Kyverno enforcement actif
+-  Prometheus scraping métriques
+-  Grafana dashboards accessibles
+-  Loki agrégant les logs
+-  Promtail collectant les logs
+-  GitHub Actions scanant les vulnérabilités
 
-## 📝 Auteur
+##  Auteur
 AMHIRAQ Abdelhakim
 
 **Projet PFA** - Plateforme Kubernetes Sécurisée Observable
